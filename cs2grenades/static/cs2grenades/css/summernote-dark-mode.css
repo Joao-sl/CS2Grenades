@@ -1,0 +1,31 @@
+.note-editor {
+  background-color: #282a36;
+  color: #ffffff;
+  border-radius: 0rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.4) !important;
+}
+.note-editable {
+  background-color: #282a36;
+  color: #ffffff;
+}
+.note-editor .panel-heading {
+  background-color: #282a36;
+  padding-bottom: 2rem;
+}
+.modal-content {
+  color: black;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  cursor: pointer !important;
+}
+::-webkit-scrollbar-track {
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  background: #417690;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a5266;
+  cursor: default;
+}

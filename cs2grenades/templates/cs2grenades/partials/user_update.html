@@ -1,0 +1,36 @@
+<div class="profile-top">
+  <div class="profile-img">
+    {% if user.avatar.image.url %}
+      <img src="{{ user.avatar.image.url }}" alt="Avatar do usuário">
+
+      {% else %}
+      <img src="https://placehold.co/168" alt="placeholder">
+    {% endif %}
+  </div>
+  <div>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="user-avatar">Envie sua imagem, tipos de imagens aceitas, .png .jpg .jpeg .webp menores que 1MB</label>
+      <input class="img-input" type="file" name="user-avatar" id="user-avatar" accept=".png, .jpg, .jpeg, .webp">
+      <button class="user-submit-btn" type="submit" id="submit-avatar-btn">Salvar</button>
+    </form>
+  </div>
+</div>
+
+<div class="profile-bottom">
+  <form method="POST" class="auth-form main">
+    {% csrf_token %}
+    <label for="name">Nome ou Nick</label>
+    <input type="text" name="name" id="name" value="{{ user.first_name }}" required>
+
+    <label for="username">Nome de Usuário</label>
+    <input type="text" name="username" id="username" value="{{ user.username }}" required>
+
+    <label for="email">E-Mail</label>
+    <input type="email" name="email" id="email" value="{{ user.email }}" required>
+
+    <div class="profile-bottom">
+      <button class="user-submit-btn" id="save-config-btn">Salvar Configurações</button>
+    </div>
+  </form>
+</div>

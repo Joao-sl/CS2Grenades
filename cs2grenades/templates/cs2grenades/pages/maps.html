@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static "cs2grenades/css/maps.css" %}">
+{% endblock head %}
+
+{% block content %}
+
+  <div class="main-content">
+    <span class="page-title">Mapas Atuais do Premier</span>
+    <div class="card-grid">
+      {% for map in maps %}
+        <a class="map-card-link" href="{% url "cs2grenades:search" %}?q={{ map.map_name }}">
+          <div class="map-card">
+            <img class="bg-card-img" src="{{ map.map_image.url }}" alt="Imagem do mapa {{ map.map_name }}">
+  
+            <div class="map-card-content">
+              <img class="map-logo" src="{{ map.map_logo.url }}" alt="Logo do mapa {{ map.map_name }}">
+              <span class="map-name" >{{ map.map_name }}</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="main-content">
+    <span class="page-title">Mapas Reservas</span>
+
+    <div class="card-grid">
+      {% for reserve_map in reserve_map_pool %}
+        <a class="map-card-link" href="{% url "cs2grenades:search" %}?q={{ reserve_map.map_name }}">
+          <div class="map-card">
+            <img class="bg-card-img" src="{{ reserve_map.map_image.url }}" alt="Imagem do mapa {{ reserve_map.map_name }}">
+  
+            <div class="map-card-content">
+              <img class="map-logo" src="{{ reserve_map.map_logo.url }}" alt="Logo do mapa {{ reserve_map.map_name }}">
+              <span class="map-name" >{{ reserve_map.map_name }}</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock content %}

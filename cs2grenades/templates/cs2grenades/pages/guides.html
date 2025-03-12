@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static "cs2grenades/css/guides.css" %}">
+{% endblock head %}
+
+{% block content %}
+  <div class="main-content">
+    <span class="page-title">Guias</span>
+    <div class="guide-card-grid">
+
+      {% for guide in page_obj %}
+        <div class="guide-card">
+          <a href="{{ guide.slug }}" class="guide-card-link">
+            <img src="{{ guide.banner.url }}" alt="Imagem referente ao titulo do post, {{ guide.title }}">
+      
+            <div class="guid-card-bottom">
+              <span class="guide-card-title">{{ guide.title }}</span>
+              <span class="guide-card-description">{{ guide.description }}</span>
+              <span class="guide-card-read-more">Guia completo <i class="fa-solid fa-angle-right"></i></span>
+            </div>
+          </a>
+            <form>
+              {% if guide.id in favorites_ids %}
+              <button type="button" class="favorite-btn active fav-guide" data-guide-id="{{ guide.id }}">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+              {% else %}
+                <button type="button" class="favorite-btn" data-guide-id="{{ guide.id }}">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+               {% endif %}
+              <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            </form>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include "cs2grenades/partials/pagination.html" %}
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="{% static "cs2grenades/js/favorites.js" %}"></script>
+{% endblock page-scripts %}

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'cs2grenades/css/home.css' %}">
+  <link rel="stylesheet" href="{% static "cs2grenades/css/guides.css" %}">
+{% endblock head %}
+
+{% block content%}
+  <div class="home-main-content">
+
+    <div class="home-search">
+      <div class="home-search-content">
+        <h1>Aprenda Utilitárias</h1>
+        <h3>Aprenda novas smokes, flashs, molotovs e granadas</h3>
+
+        <form action="{% url "cs2grenades:search" %}" method="GET" class="home-form">
+          <label for="home-search" hidden>Pesquise aqui</label>
+          <input type="text" name="q" id="home-search" placeholder="Procure utilitárias ou mapas" required>
+          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <svg style="background-color:#161c24;" width="100%" height="70" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path id="wavepath" d="M0,0  L110,0C35,150 35,0 0,100z" fill="#282A35"></path>
+    </svg>
+
+    <h1 class="home-title">Últimos Guias</h1>
+    <div class="home-content">
+      <div class="home-content-grid">
+        <div class="home-text-content-wrapper">
+          <h1>Guias</h1>
+          <p>Veja guias de granadas completos separados por mapas</p>
+          <div class="home-read-more">
+            <a href="{% url "cs2grenades:guides"%}" class="home-read-more-link">Ver mais</a>
+          </div>
+        </div>
+
+        <div class="home-card">
+          {% for guide in guides %}
+            <a href="{% url "cs2grenades:guide_post" guide.slug %}" class="home-card-link">
+              <img src="{{ guide.banner.url }}" alt="Imagem referente ao post {{ guide.title }}">
+              <p>{{ guide.title }}</p>
+            </a>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="home-line">
+
+    <h1 class="home-title">Últimos Tutoriais</h1>
+    <div class="home-content">
+      <div class="home-content-grid">
+        <div class="home-text-content-wrapper">
+          <h1>Tutoriais</h1>
+          <p>Veja pixel de smoke, flash molotov e granada em todos os mapas </p>
+          <div class="home-read-more">
+            <a href="{% url "cs2grenades:tutorials" %}" class="home-read-more-link">Ver mais</a>
+          </div>
+        </div>
+        
+        <div class="home-card">
+          {% for tutorial in tutorials %}
+            <a href="" class="tutorial-card home-card-link">
+              <img src="{{ tutorial.tutorial_banner.url }}" alt="Imagem referente ao post {{ tutorial.tutorial_title }}">
+              <p>{{ tutorial.tutorial_title }}</p>
+            </a>
+            <div class="iframe-template" data-iframe="{{ tutorial.tutorial_video }}"></div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+
+    <h3 class="home-title">Utilitárias</h3>
+    <div class="home-nades-wrapper">
+      <div class="home-nades">
+        <a href="{% url "cs2grenades:search" %}?q=smoke" class="nade">
+          <img src="{% static "cs2grenades/assets/home/smoke-re.png" %}" alt="Smoke grenade">
+          <p>Smokes</p>
+        </a>
+
+        <a href="{% url "cs2grenades:search" %}?q=flash" class="nade">
+          <img src="{% static "cs2grenades/assets/home/flash-re.png" %}" alt="Flash grenade">
+          <p>Flashs</p>
+        </a>
+
+        <a href="{% url "cs2grenades:search" %}?q=molotov" class="nade">
+          <img src="{% static "cs2grenades/assets/home/molotov-re.png" %}" alt="Molotov grenade">
+          <p>Molotovs</p>
+        </a>
+
+        <a href="{% url "cs2grenades:search" %}?q=granada" class="nade">
+          <img src="{% static "cs2grenades/assets/home/he-re.png" %}" alt="HE grenade">
+          <p>Granadas</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="{% static "cs2grenades/js/tutorials.js" %}"></script>
+{% endblock page-scripts %}

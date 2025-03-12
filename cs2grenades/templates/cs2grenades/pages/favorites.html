@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'cs2grenades/css/guides.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+  <div class="main-content">
+    <span class="page-title">Seus Favoritos</span>
+
+    {% if page_obj %}
+      <div class="guide-card-grid">
+        {% for fav in page_obj %}
+          <div class="guide-card">
+            
+            {% if fav.type == 'guide' %}
+              <a href="{% url 'cs2grenades:guide_post' fav.object.slug %}" class="guide-card-link">
+                <img src="{{ fav.object.banner.url }}" alt="Imagem referente ao título do post, {{ fav.object.title }}">
+                <div class="guid-card-bottom">
+                  <span class="guide-card-title">{{ fav.object.title }}</span>
+                </div>
+              </a>
+              <form method="POST">
+                {% if fav.object.id in favorites_ids %}
+                  <button type="button" class="favorite-btn active" data-guide-id="{{ fav.object.id }}">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                {% else %}
+                  <button type="button" class="favorite-btn" data-guide-id="{{ fav.object.id }}">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                {% endif %}
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+              </form>
+              
+            {% elif fav.type == 'tutorial' %}
+              <div class="guide-card tutorial-card">
+                <a href="#" class="guide-card-link">
+                  <img src="{{ fav.object.tutorial_banner.url }}" alt="Imagem referente ao título do tutorial, {{ fav.object.tutorial_title }}">
+                  <div class="guid-card-bottom">
+                    <span class="guide-card-title">{{ fav.object.tutorial_title }}</span>
+                  </div>
+                </a>
+                <form method="POST">
+                  {% if fav.object.id in tutorials_fav_ids %}
+                    <button type="button" class="favorite-btn active" data-tutorial-id="{{ fav.object.id }}">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  {% else %}
+                    <button type="button" class="favorite-btn" data-tutorial-id="{{ fav.object.id }}">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  {% endif %}
+                  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                </form>
+              </div>
+              <div class="iframe-template" data-iframe="{{ fav.object.tutorial_video }}"></div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+
+  {% if not page_obj %}
+    <div class="main-content">
+      <div class="left-404">
+        <span class="title-404">Vazio</span>
+        <span class="text-content-404">Você não tem favoritos</span>
+        <span class="sub-text-content-404">Se sinta à vontade para favoritar algo</span>
+        <div class="links-404-wrapper">
+          <a class="link-404" href="{% url 'cs2grenades:guides' %}">Guias</a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% include "cs2grenades/partials/pagination.html" %}
+
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="{% static 'cs2grenades/js/favorites.js' %}"></script>
+  <script src="{% static 'cs2grenades/js/tutorials.js' %}"></script>
+{% endblock page-scripts %}

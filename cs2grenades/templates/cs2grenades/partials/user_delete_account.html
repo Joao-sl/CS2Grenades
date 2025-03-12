@@ -1,0 +1,16 @@
+<div>
+  <h3 style="margin-bottom: 2rem;">ATENÇÃO ESSA AÇÃO NÃO PODE SER DESFEITA.</h3>
+  <button class="delete-btn" id="delete-account-btn">DELETAR CONTA</button>
+  <div class="delete-container" id="delete-container">
+    <h4 for="delete">Deseja realmente deletar a conta?</h4>
+    <form method="POST" class="delete-form">
+      {% csrf_token %}
+      <label for="delete">Digite "deletar" e confirme para prosseguir</label>
+      <input type="text" name="delete" id="delete" placeholder="Digite deletar ou cancele" required>
+      <div>
+        <button type="button" class="cancel-btn" id="cancel-btn">Cancelar</button>
+        <button type="submit" class="delete-btn" id="confirm-btn">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>

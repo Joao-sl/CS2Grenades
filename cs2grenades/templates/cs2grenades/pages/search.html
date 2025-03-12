@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static "cs2grenades/css/guides.css" %}">
+{% endblock head %}
+
+{% block content %}
+
+  <div class="main-content">
+    <span class="page-title">Buscando por: {{ search_value }}</span>
+
+    {% if posts %}
+      <h3>Guias</h3>
+      <div class="guide-card-grid">
+        {% for post in posts %}
+          <div class="guide-card">
+            <a href="{% url 'cs2grenades:guide_post' post.slug %}" class="guide-card-link">
+              <img src="{{ post.banner.url }}" alt="Imagem referente ao titulo do post, {{ post.title }}">
+              <div class="guid-card-bottom">
+                <span class="guide-card-title">{{ post.title }}</span>
+                <span class="guide-card-description">{{ post.description }}</span>
+                <span class="guide-card-read-more">Guia completo <i class="fa-solid fa-angle-right"></i></span>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      <br>
+      <br>
+    {% endif %}
+
+    {% if tutorials %}
+      <h3>Tutoriais</h3>
+      <div class="guide-card-grid">
+        {% for tutorial in tutorials %}
+          <div class="guide-card tutorial-card">
+            <a href="" class="guide-card-link">
+              <img src="{{ tutorial.tutorial_banner.url }}" alt="Imagem referente ao titulo do post, {{ tutorial.tutorial_title }}">        
+              <div class="guid-card-bottom">
+                <span class="guide-card-title">{{ tutorial.tutorial_title }}</span>
+                <span class="guide-card-description">{{ tutorial_description }}</span>
+              </div>
+            </a>
+          </div>
+          <div class="iframe-template" data-iframe="{{ tutorial.tutorial_video }}"></div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    {% if not posts and not tutorials %}
+      <div class='main-content'>
+      <div class="search-404-grid">
+
+        <div class="left-404">
+          <span class="title-404">404</span>
+          <span class="text-content-404">Desculpe, não encontramos nada para: {{ search_value }}</span>
+          <span class="sub-text-content-404">Tente fazer outra pesquisa ou se preferir tem alguns links úteis abaixo.</span>
+          <div class="links-404-wrapper">
+            <a class="link-404" href="{% url "cs2grenades:index" %}">Home</a>
+            <a class="link-404" href="{% url "cs2grenades:guides" %}">Guias</a>
+            <a class="link-404" href="{% url "cs2grenades:tutorials" %}">Tutorials</a>
+          </div>
+        </div>
+        
+        <div class="right-404">
+          <img src="{% static "cs2grenades/assets/hs.png" %}" alt="">
+        </div>
+
+      </div>
+      </div>
+    {% endif %}
+
+  </div>
+  {% include "cs2grenades/partials/pagination.html" %}
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="{% static "cs2grenades/js/tutorials.js" %}"></script>
+{% endblock page-scripts %}

@@ -1,0 +1,117 @@
+{% load static %}
+<nav class="menu-wrapper">
+  <div class="menu-bars-icon">
+    <button class="menu-bars-btn" id="menu-bars-btn">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="menu-left-side">
+
+    <div class="menu-logo">
+      <a href="{% url "cs2grenades:index" %}">
+        <img src="{{ site_setting.logo.url }}" alt="Nuvem de fumaça a esquerda CS2Grenades a direita">
+      </a>
+    </div>
+
+    <div class="menu-links" id="menu-links">
+      <ul>
+        <li><a href="{% url "cs2grenades:index" %}">Home</a></li>
+        <li><a href="{% url "cs2grenades:guides" %}">Guias</a></li>
+        <li><a href="{% url "cs2grenades:tutorials" %}">Tutoriais</a></li>
+        <li><a href="{% url "cs2grenades:maps" %}">Mapas</a></li>
+
+        <li class="submenu">
+          <a href="#cs" aria-haspopup="true" aria-expanded="false">Grenadas <i class="fa-solid fa-angle-down"></i></a>
+
+          <ul class="submenu-content">
+            <li><a href="{% url "cs2grenades:search"%}?q=Smoke">Smokes</a></li>
+            <li><a href="{% url "cs2grenades:search"%}?q=Molotov">Molotovs</a></li>
+            <li><a href="{% url "cs2grenades:search"%}?q=Flash">Flashs</a></li>
+            <li><a href="{% url "cs2grenades:search"%}?q=Granada">HEs</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  {% if not user.is_authenticated %}
+    <div class="menu-right-side">
+      <button class="search-btn-menu" id="search-btn-menu"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a class="sign-in" id="sign-in" href="">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        Entrar
+      </a>
+    </div>
+  {% endif %}
+  
+  {% if user.is_authenticated %}
+    <div class="menu-right-side">
+      <button class="search-btn-menu" id="search-btn-menu"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <li class="submenu">
+        <div class="user-name">
+          {% if user.avatar.image.url %}
+            <a class="menu-agent-img" href="#"><img src="{{ user.avatar.image.url }}" alt="Avatar do usuário"></a>
+          {% else %}
+            <a class="menu-agent-img" href="#"><img src="{% static "cs2grenades/assets/agents/Primeiro-Tenente.png" %}" alt="Avatar de um policial"></a>
+          {% endif %}
+        </div>
+        <ul class="submenu-content">
+          <li><a href="{% url "cs2grenades:profile" %}">Perfil</a></li>
+          <li><a href="{% url "cs2grenades:favorites" %}">Favoritos</a></li>
+          <li><a href="{% url "cs2grenades:logout" %}">Sair</a></li>
+        </ul>
+      </li>
+    </div>
+  {% endif %}
+</nav>
+
+<div class="search-wrapper" id="search-wrapper">
+  <form action="{% url "cs2grenades:search" %}" method="GET" class="search-form" id="search-form">
+    <label for="search-input" hidden>Pesquise aqui</label>
+    <button type="submit" class="search-btn" id="search-btn">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <input type="text" class="search-input-menu" id="search-input" placeholder="Pesquise aqui" name="q" required>
+    <button type="button" class="close-search" id="close-search">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </form>
+</div>
+
+<script>
+  const searchDiv = document.querySelector('#search-wrapper');
+  const searchBtnMenu = document.querySelector('#search-btn-menu');
+  const closeSearch = document.querySelector('#close-search');
+  const searchInput = document.querySelector('#search-input');
+  const searchForm = document.querySelector('#search-form');
+
+  searchBtnMenu.addEventListener('click', (event) => {
+    searchDiv.classList.toggle('active');
+    searchInput.focus();
+  });
+
+  closeSearch.addEventListener('click', (event) => {
+    searchDiv.classList.remove('active');
+  });
+
+  window.addEventListener('mousedown', (event) => {
+    if (!searchForm.contains(event.target) && (searchDiv.classList.contains('active'))) {
+      searchDiv.classList.remove('active');
+    }
+  });
+
+  const menuBarsBtn = document.querySelector('#menu-bars-btn');
+  const menuLinks = document.querySelector('#menu-links');
+
+  menuBarsBtn.addEventListener('click', (event)=> {
+    event.stopPropagation();
+    menuLinks.classList.toggle('menu-links-mobile');
+  });
+  
+  window.addEventListener('mousedown', (event) => {
+      if (!menuLinks.contains(event.target) && !menuBarsBtn.contains(event.target) && menuLinks.classList.contains('menu-links-mobile')) {
+        menuLinks.classList.remove('menu-links-mobile')
+      }
+    })
+</script>

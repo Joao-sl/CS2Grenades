@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static "cs2grenades/css/guides.css" %}">
+{% endblock head %}
+
+{% block content %}
+  <div class="main-content">
+    <span class="page-title">Tutorials</span>
+    <div class="guide-card-grid">
+
+      {% for tutorial in page_obj %}
+        <div class="guide-card tutorial-card">
+          <a href="" class="guide-card-link">
+            <img src="{{ tutorial.tutorial_banner.url }}" alt="Imagem referente ao titulo do post, {{ tutorial.tutorial_title }}">
+      
+            <div class="guid-card-bottom">
+              <span class="guide-card-title">{{ tutorial.tutorial_title }}</span>
+              <span class="guide-card-description">{{ tutorial.tutorial_description }}</span>
+            </div>
+          </a>
+
+          <form>
+            {% if tutorial.id in tutorial_fav_ids %}
+            <button type="button" class="favorite-btn active fav-tutorial" data-tutorial-id="{{ tutorial.id }}">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            {% else %}
+              <button type="button" class="favorite-btn" data-tutorial-id="{{ tutorial.id }}">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+             {% endif %}
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+          </form>
+
+        </div>
+
+        <div class="iframe-template" data-iframe="{{ tutorial.tutorial_video }}"></div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include "cs2grenades/partials/pagination.html" %}
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="{% static "cs2grenades/js/tutorials.js" %}"></script>
+{% endblock page-scripts %}

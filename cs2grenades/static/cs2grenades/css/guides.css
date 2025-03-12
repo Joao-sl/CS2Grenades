@@ -1,0 +1,171 @@
+/* Guides Cards */
+.guide-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(28rem, 100%), 1fr));
+  gap: 2rem;
+  height: auto;
+  margin: 2rem;
+  background-color: var(--content-bg-4);
+  border-radius: 1rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.1);
+  padding: 4rem 6rem;
+}
+
+.guide-card {
+  position: relative;
+}
+
+.guide-card img {
+  width: 100%;
+  height: 18rem;
+  max-height: 18rem;
+  border-radius: 5%;
+  object-fit: cover;
+  filter: brightness(80%);
+  /* box-shadow: 0rem 0rem 1rem rgba(255, 255, 255, 0.4); */ /* Test Latter */
+}
+
+.guid-card-bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-card-title {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.guide-card-description {
+  margin-top: 1rem;
+  height: 6rem;
+  max-height: 6rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-wrap: wrap;
+}
+
+.guide-card-read-more {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: var(--orange);
+  transition: 0.2s ease-in-out;
+}
+
+.guide-card:hover .guide-card-read-more{
+  color: var(--orange-dkr);
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.favorite-btn .fa-heart {
+  font-size: 2.4rem;
+  transition: 0.3s ease-in-out;
+}
+
+.favorite-btn:hover .fa-heart,
+.favorite-btn.active .fa-heart {
+  color: red;
+}
+
+.favorite-btn .fa-heart::after {
+  content: '\f004'; /* Solid heart FontAwesome */
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+  transform: scale(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.favorite-btn.active .fa-heart::after {
+  transform: scale(1);
+}
+
+
+/* Guide Posts */
+.guide-post-banner img {
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  margin-top: 9.5rem;
+  margin-bottom: -10rem;
+  /* filter: brightness(80%); */
+  /* box-shadow: 0rem -1.6rem 8rem 1rem rgb(78, 89, 79); */
+}
+
+.top-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 1.4rem;
+  padding: 1rem 4rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+}
+.guide-dates {
+  display: flex;
+  gap: 2rem;
+}
+.guide-dates span {
+  border-left: 0.2rem solid rgba(255, 255, 255, 0.4);
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.guide-tags {
+  display: flex;
+  gap: 1rem;
+}
+.guide-tags a {
+  color: rgba(255, 255, 255, 0.7);
+  border-left: 0.2rem solid rgba(255, 255, 255, 0.4);
+  padding-left: 1rem;
+}
+.guide-page-title {
+  text-align: center;
+  padding: 3rem 0rem;
+}
+
+/* Tutorials */
+.iframe-template {
+  display: none;
+  position: relative;
+}
+
+.iframe-template.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  backdrop-filter: brightness(20%);
+}

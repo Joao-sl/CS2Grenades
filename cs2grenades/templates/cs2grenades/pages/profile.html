@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+  <div class="profile-wrapper main-content">
+    <div class="profile-card">
+      <div class="profile-title">
+        <i class="fa-solid fa-gear"></i>
+        <h1>Configurações</h1>
+      </div>
+
+      <div class="profile-links">
+        <button id="user-info">Informações</button>
+        <button id="change-password">Mudar Senha</button>
+        <button id="del-account">Deletar Conta</button>
+      </div>
+
+      <div class="profile-content-wrapper" id="profile-content"></div> 
+    </div>
+  </div>
+  
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="{% static "cs2grenades/js/profile.js" %}"></script>
+{% endblock page-scripts %}

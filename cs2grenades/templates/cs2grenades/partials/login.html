@@ -1,0 +1,47 @@
+{% load static %}
+
+    {% if not user.is_authenticated %}{% endif %}
+
+    <div class="auth-card">
+      <span class="close-btn" id="close-popup">&times;</span>
+      <img class="auth-logo" src="{{ site_setting.logo.url }}" alt="Logo, em desenvolvimento">
+      <h1 class="auth-title">Boas Vindas</h1>
+      <p >Faça login abaixo</p>
+
+      <div class="socials-signin">
+        <button class="google" id="google-btn">
+          <img src="{% static "cs2grenades/assets/Google.png" %}" alt="Logo Google">
+          <span>Google</span>
+        </button>
+        <button class="youtube" id="youtube-btn">
+          <img src="{% static "cs2grenades/assets/Youtube.png" %}" alt="Logo YouTube">
+          <span>YouTube</span>
+        </button>
+      </div>
+
+      <div class="or-wrapper">
+        <hr> <span class="or"> ou </span> <hr>
+      </div>
+
+      <form action="" method="post" class="auth-form" id="auth-form">
+        {% csrf_token %}
+        <label for="auth-email" class="hidden">Email</label>
+        <input type="email" placeholder="Email" id="auth-email">
+
+        <label for="auth-password" class="hidden">Senha</label>
+        <input type="password" placeholder="Senha" id="auth-password">
+
+        <button class="auth-btn">Entrar</button>
+        <div class="error" id="error"></div>
+
+        <a class="form-link" href="#">Esqueci minha senha!</a>
+
+        <p>Não tem uma conta? <a class="form-link" id="sign-up-link" href="">Cadastre-se</a></p>
+      </form>
+      
+      {% comment %} <p class="policy">
+        Ao se inscrever, você concorda com nossos
+        <a href="#">Termos de Uso</a> e com a 
+        <a href="#">Política de Privacidade.</a>
+      </p> {% endcomment %}
+    </div>

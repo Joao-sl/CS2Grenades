@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load time_filters %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static "cs2grenades/css/guides.css" %}">
+{% endblock head %}
+
+{% block content %}
+  <div class="guide-post-banner">
+    <img id="user-image" src="{{ guide.banner.url}}" alt="Banner referente ao post, {{ guide.title }}">
+  </div>
+
+  <div class="main-content">
+    <div class="top-wrapper">
+      <div class="guide-dates">
+        <span><i class="fa-regular fa-calendar-plus"></i> Criado há {{ guide.created_at|timesince|split}}</span>
+        <span><i class="fa-solid fa-pen fa-rotate-270"></i> Atualizado há {{ guide.updated_at|timesince|split }}</span>
+      </div>
+      <div class="guide-tags">
+        <span>Tags </span>
+        {% for tag in guide.tags.all %}
+          <a class="dft-hover" href="{% url "cs2grenades:search" %}?q={{ tag }}"><i class="fa-solid fa-tag"></i> {{ tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <h1 class="guide-page-title">{{ guide.title|upper }}</h1>
+    <p>{{ guide.description }}</p>
+    {{ guide.content|safe }}
+  </div>
+
+{% endblock content %}
+
+{% block page-scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.6.0/color-thief.min.js"></script>
+  <script src="{% static "cs2grenades/js/colorThief.js" %}"></script>
+{% endblock page-scripts %}

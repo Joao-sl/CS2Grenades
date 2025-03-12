@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  
+  {% include "cs2grenades/partials/head.html" %}
+  {% block head %}{% endblock head %}
+
+</head>
+<body>
+  {% include "cs2grenades/partials/menu.html" %}
+  
+  <!-- Preenchido via JS (auth.js) -->
+  <div class="auth-wrapper" id="auth-popup"></div>
+  
+  {% block content %}{% endblock content %}
+
+  {% include "cs2grenades/partials/footer.html" %}
+
+  {% include "cs2grenades/partials/alerts.html" %}
+
+  {% block base-scripts %}
+    <script src="{% static "cs2grenades/js/utils.js" %}"></script>
+    <script src="{% static "cs2grenades/js/alerts.js" %}"></script>
+    <script src="{% static "cs2grenades/js/auth.js" %}"></script>
+  {% endblock base-scripts %}
+
+  {% block page-scripts %} {% endblock page-scripts %}
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% load static %}
+
+<div class="auth-card">
+  <span class="close-btn" id="close-popup">&times;</span>
+  <img class="auth-logo" src="{{ site_setting.logo.url }}" alt="Logo, em desenvolvimento">
+  <h1 class="auth-title">Crie sua Conta</h1>
+  <p>Cadastre-se abaixo</p>
+
+  <div class="socials-signin">
+    <button class="google" id="google-btn">
+      <img src="{% static "cs2grenades/assets/Google.png" %}" alt="Logo Google">
+      <span>Google</span>
+    </button>
+    <button class="youtube" id="youtube-btn">
+      <img src="{% static "cs2grenades/assets/Youtube.png" %}" alt="Logo YouTube">
+      <span>YouTube</span>
+    </button>
+  </div>
+
+  <div class="or-wrapper">
+    <hr> <span class="or"> ou </span>
+    <hr>
+  </div>
+
+  <form method="post" class="auth-form" id="auth-form">
+    {% csrf_token %}
+    <label for="auth-name" class="hidden">Nome ou Nick</label>
+    <input type="text" placeholder="Nome ou Nick" id="auth-name" required>
+
+    <label for="auth-email" class="hidden">Email</label>
+    <input type="email" placeholder="Email" id="auth-email" required>
+
+    <label for="auth-password" class="hidden">Senha</label>
+    <input type="password" placeholder="Senha" id="auth-password" minlength="8" required>
+
+    <label for="auth-confirm-password" class="hidden">Confirmar Senha</label>
+    <input type="password" placeholder="Confirmar Senha" id="auth-confirm-password" minlength="8" required>
+
+    <button class="auth-btn" type="submit">Cadastrar</button>
+
+    <div class="error" id="error"></div>
+
+  </form>
+  <p class="sign-in-link">Já tem uma conta? <a class="form-link" id="sign-in-link" href="">Faça login</a></p>
+
+  <p class="policy">
+    Ao se inscrever, você concorda com nossos
+    <a href="#">Termos de Uso</a> e com a
+    <a href="#">Política de Privacidade.</a>
+  </p>
+
+</div>

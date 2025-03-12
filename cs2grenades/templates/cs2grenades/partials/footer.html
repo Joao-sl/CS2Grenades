@@ -1,0 +1,45 @@
+{% load static %}
+<div class="footer-wrapper">
+  <div class="footer-top ">
+    <div class="footer-content">
+      <img class="footer-logo" src="{{ site_setting.logo.url }}" alt="Logo do site">
+      <p class="footer-text">{{ site_setting.description }}</p>
+    </div>
+
+    <div class="footer-content">
+      <span class="footer-title">Páginas</span>
+      <a href="{% url "cs2grenades:index" %}">Home</a>
+      <a href="{% url "cs2grenades:guides" %}">Guias</a>
+      <a href="{% url "cs2grenades:tutorials" %}">Tutoriais</a>
+      <a href="{% url "cs2grenades:maps" %}">Mapas</a>
+    </div>
+
+    <div class="footer-content">
+      <span class="footer-title">Contato</span>
+      <span><i class="fa-regular fa-envelope"></i> <span style="font-weight: bold">E-mail:</span> {{ site_setting.email }}</span>
+    </div>
+
+    <div class="footer-content">
+      <span class="footer-title">Redes Sociais</span>
+      <div class="socials">
+        <a href="{{ site_setting.youtube }}" target="_blank" ><i class="fa-brands fa-youtube"></i></a>
+        <a href="{{ site_setting.tiktok }}" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="{{ site_setting.twitter }}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        <a href="{{ site_setting.instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-content">
+      <span class="footer-title">Termos</span>
+   
+        <a href="#">Politica de Privacidade</a>
+        <a href="#">Termos de Serviço</a>
+ 
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>&#169{{ site_setting.site_name }}. Todos os direitos reservados.</span>
+  </div>
+</div>
